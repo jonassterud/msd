@@ -1,6 +1,6 @@
 /* CONTENT SCRIPT */
 
-// Ask background script to activate popup
+// Activate popup
 chrome.runtime.sendMessage({id: "msd-popup"});
 
 // Inject script on button press from popup
@@ -13,14 +13,14 @@ chrome.runtime.onMessage.addListener(async request => {
     }
 });
 
-// Start downloading PDF after data has finished loading from injected script
+// Download PDF after injected script has gathered data
 document.addEventListener("msd-ready", async e => {
     let data = JSON.parse(e?.detail || "null");
     let pageCount = data?.pageCount;
     let urls = data?.urls;
     let isPNG = /score_\d+.png/.test(data?.urls?.[0]);
 
-    // Error checking
+    // Check data for errors
     if(!data || !pageCount || !urls?.length) {
         if(confirm("Wasn't able to fetch data, please reload the page")) {
             location.reload();
@@ -28,7 +28,7 @@ document.addEventListener("msd-ready", async e => {
         return;
     }
 
-    // Create document and pipe it to a blob stream
+    // Create PDF document and pipe to blob stream
     let doc = new PDFDocument({
         autoFirstPage: false,
         bufferPages: true,
@@ -37,7 +37,7 @@ document.addEventListener("msd-ready", async e => {
     let stream = doc.pipe(blobStream());
     let resCount = 0; // Keep track of current page count
 
-    // Loop trough urls, fetch images and add them to the document
+    // Loop URLs, fetch images, and add to document
     for(let i=0; i<pageCount && i<urls.length; i++) {
         chrome.runtime.sendMessage({
             id: "msd-fetch",
@@ -46,21 +46,22 @@ document.addEventListener("msd-ready", async e => {
                 isPNG: isPNG
             })
         }, raw_fetchRes => {
+            // Check if an error occured
             let fetchRes = JSON.parse(raw_fetchRes?.detail || "null");
             if(!fetchRes || fetchRes.state === "error") {
                 return alert(fetchRes?.data);
             }
 
-            // Add pages, and make sure they are in the right order
+            // Add page(s)
             while(i >= doc.bufferedPageRange().count) doc.addPage();
             doc.switchToPage(i);
-            resCount++;
 
             // Handle image type
             if(isPNG) doc.image(new Uint8Array(fetchRes.data).buffer, 0, 0, {fit: [595, 842]});
             else SVGtoPDF(doc, fetchRes.data, 0, 0, {preserveAspectRatio: "16:9"});
+            resCount++;
 
-            // Send download request to background page
+            // Send download request to background script
             if(resCount >= pageCount) {
                 doc.end();
                 stream.on("finish", () => {
@@ -70,6 +71,7 @@ document.addEventListener("msd-ready", async e => {
                             url: stream.toBlobURL("application/pdf")
                         })
                     }, raw_downloadRes => {
+                        // Check if an error occured
                         let downloadRes = JSON.parse(raw_downloadRes?.detail || "null");
                         if(!downloadRes && downloadRes.state === "error") {
                             return alert(downloadRes?.data);
