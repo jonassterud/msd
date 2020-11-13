@@ -60,6 +60,12 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
                 saveAs: true
             }, () => {
                 chrome.runtime.sendMessage({id: "msd-finished"});
+                return sendResponse({
+                    detail: JSON.stringify({
+                        state: "success",
+                        data: ""
+                    })
+                })
             });
             break;
     }
