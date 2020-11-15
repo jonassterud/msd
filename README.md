@@ -9,7 +9,7 @@
 Musescore often updates their website, and there is a chance that this extension might then temporarily break. I often get many error reports on the actual chrome extension, but posting them here is preferred. When reporting a issue, try to include as much information as possible (operating system, browser, extension version, etc.), and try your best to describe the issue in detail.
 
 ## Contributing
-If you solved a bug, cleaned up some code, or anything else, feel free to send a pull request.
+If you solved a bug, cleaned up some code, or anything else, feel free to send a pull request in the branch for the next release.
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](./LICENSE) for details.
