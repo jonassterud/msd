@@ -1,6 +1,7 @@
 /* POPUP SCRIPT */
 
 window.onload = () => {
+    // Send message on button press
     chrome.tabs.query({active: true, currentWindow: true}, tabs => {
         let pdf = document.getElementById("pdf");
         pdf.addEventListener("click", () => {

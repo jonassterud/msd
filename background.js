@@ -7,7 +7,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             chrome.pageAction.show(sender.tab.id);
             break;
         case "msd-fetch":
-            // Check for errors with URL
+            // Check URL for errors
             if(!data?.url?.length) {
                 return sendResponse({
                     detail: JSON.stringify({
@@ -17,12 +17,13 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
                 });
             };
 
-            // Send XML request and send data as response
+            // Open and send XML request
             let xhr = new XMLHttpRequest();
             xhr.open("GET", data.url);
             xhr.responseType = (data.isPNG ? "arraybuffer" : "");
             xhr.send();
 
+            // Send data as response
             xhr.addEventListener("load", () => {
                 if(data.isPNG) {
                     return sendResponse({
@@ -42,7 +43,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             });
             break;
         case "msd-download":
-            // Check for errors with URL
+            // Check URL for errors
             if(!data?.url) {
                 return sendResponse({
                     detail: JSON.stringify({
@@ -60,6 +61,12 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
                 saveAs: true
             }, () => {
                 chrome.runtime.sendMessage({id: "msd-finished"});
+                return sendResponse({
+                    detail: JSON.stringify({
+                        state: "success",
+                        data: ""
+                    })
+                })
             });
             break;
     }
