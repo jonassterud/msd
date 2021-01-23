@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "Musescore Downloader",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "Download PDFs from Musescore.",
     "permissions": ["*://musescore.com/*", "*://s3.ultimate-guitar.com/*", "downloads"],
     "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
