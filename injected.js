@@ -12,8 +12,9 @@
     }
 
     // Gather data
-    let scoreContainer = document.querySelector("img[src*=score_]")?.parentElement?.parentElement;
-    let pageCount = scoreContainer?.querySelectorAll(".vAVs3")?.length;
+    let firstImage = document.querySelector("img[src*=score_]");
+    let scoreContainer = firstImage?.parentElement?.parentElement;
+    let pageCount = scoreContainer?.querySelectorAll(`.${firstImage.parentElement?.classList[0]}`)?.length;
     let urls = [];
 
     // Check data for errors
