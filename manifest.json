@@ -8,11 +8,15 @@
         "48": "icons/icon48.png",
         "128": "icons/icon128.png"
     },
+    "permissions": [
+        "*://musescore.com/*",
+        "*://s3.ultimate-guitar.com/*",
+        "downloads"
+    ],
     "background": {
         "scripts": [
             "background_script.js"
-        ],
-        "persistent": false
+        ]
     },
     "content_scripts": [
         {
@@ -30,13 +34,14 @@
     "web_accessible_resources": [
         "injected_script.js"
     ],
-    "page_action": {
+    "browser_action": {
         "default_icon": {
             "16": "icons/icon16.png",
             "48": "icons/icon48.png",
             "128": "icons/icon128.png"
         },
-        "default_popup": "pageAction/popup.html",
-        "default_title": "Musescore Downloader"
+        "browser_style": true,
+        "default_title": "Musescore Downloader",
+        "default_popup": "browserAction/index.html"
     }
 }
