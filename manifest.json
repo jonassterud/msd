@@ -1,30 +1,34 @@
 {
     "manifest_version": 2,
     "name": "Musescore Downloader",
-    "version": "1.0.4",
     "description": "Download PDFs from Musescore.",
-    "permissions": ["*://musescore.com/*", "*://s3.ultimate-guitar.com/*", "downloads"],
-    "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
-    "web_accessible_resources" : ["injected.js"],
+    "version": "2.0.0",
     "icons": {
         "16": "icons/icon16.png",
         "48": "icons/icon48.png",
         "128": "icons/icon128.png"
     },
     "background": {
-        "scripts": ["background.js"],
+        "scripts": [
+            "background_script.js"
+        ],
         "persistent": false
     },
     "content_scripts": [
         {
-            "matches": ["*://musescore.com/*"],
+            "matches": [
+                "*://musescore.com/*"
+            ],
             "js": [
                 "libraries/pdfkit.min.js",
                 "libraries/blob-stream.min.js",
                 "libraries/svg-pdfkit.min.js",
-                "main.js"
+                "content_script.js"
             ]
         }
+    ],
+    "web_accessible_resources": [
+        "injected_script.js"
     ],
     "page_action": {
         "default_icon": {
@@ -32,6 +36,7 @@
             "48": "icons/icon48.png",
             "128": "icons/icon128.png"
         },
-        "default_popup": "popup/popup.html"
+        "default_popup": "pageAction/popup.html",
+        "default_title": "Musescore Downloader"
     }
 }
