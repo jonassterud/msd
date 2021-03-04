@@ -13,8 +13,12 @@
         "*://s3.ultimate-guitar.com/*",
         "downloads"
     ],
+    "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
     "background": {
         "scripts": [
+            "libraries/pdfkit.min.js",
+            "libraries/blob-stream.min.js",
+            "libraries/svg-pdfkit.min.js",
             "background_script.js"
         ]
     },
@@ -24,9 +28,7 @@
                 "*://musescore.com/*"
             ],
             "js": [
-                "libraries/pdfkit.min.js",
-                "libraries/blob-stream.min.js",
-                "libraries/svg-pdfkit.min.js",
+               
                 "content_script.js"
             ]
         }

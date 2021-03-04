@@ -9,7 +9,7 @@ window.onload = () => {
             if (isNaN(pageCount) || pageCount === 0) {
                 pageCount = parseInt(prompt("Page count not found, please set manually:"), 10);
             }
-            
+
             (function loop(i=0) {
                 const MAX_PAGE_COUNT = 200;
                 if (i >= MAX_PAGE_COUNT) return;
