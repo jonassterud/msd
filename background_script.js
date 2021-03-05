@@ -1,3 +1,7 @@
+function onError(error) {
+    console.error(`Error: ${error.message}`);
+}
+
 browser.runtime.onMessage.addListener((message) => {
     if (message.id === "msd-create") {
         let doc = new PDFDocument({
@@ -35,8 +39,7 @@ browser.runtime.onMessage.addListener((message) => {
                         });
                     });
                 }
-            
-            });
+            }).catch(onError);
         }
     }
 });

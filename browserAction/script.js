@@ -1,3 +1,7 @@
+function onError(error) {
+    console.error(`Error: ${error.message}`);
+}
+
 window.onload = async () => {
     const button = document.querySelector("input[type='button']");
     const tabs = await browser.tabs.query({
@@ -8,6 +12,6 @@ window.onload = async () => {
         button.classList.add("loading");
         browser.tabs.sendMessage(tabs[0].id, { // Send to content_script.js
             id: "msd-start"
-        });
+        }).catch(onError);
     });
 }
