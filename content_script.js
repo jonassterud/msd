@@ -1,7 +1,3 @@
-function onError(error) {
-    console.error(`Error: ${error.message}`);
-}
-
 window.onload = () => {
     browser.runtime.onMessage.addListener((message) => {
         if (message.id === "msd-start") {
@@ -13,8 +9,7 @@ window.onload = () => {
             if (!firstImage || !scoreContainer) {
                 return console.error("Error: Wasn't able to find first image, or score container");
             }
-
-            if (isNaN(pageCount) || pageCount === 0) {
+            else if (isNaN(pageCount) || pageCount === 0) {
                 pageCount = parseInt(prompt("Page count not found, please set manually:"), 10);
             }
 
@@ -24,7 +19,7 @@ window.onload = () => {
 
                 scoreContainer.scrollTo(0, i * (scoreContainer.scrollHeight / pageCount));
                 setTimeout(() => {
-                    const loadedImageURLs = [...scoreContainer.querySelectorAll("img")].map((e) => e?.src);
+                    const loadedImageURLs = [...scoreContainer.querySelectorAll("img")].map((e) => e.src);
                     const imageURL = loadedImageURLs.find((e) => e.includes("score_" + i));
 
                     if (imageURL) urls.push(imageURL);
@@ -40,7 +35,10 @@ window.onload = () => {
                 browser.runtime.sendMessage({
                     id: "msd-create",
                     urls: urls
-                }).catch(onError);
+                })
+                .catch((error) => {
+                    console.error(`Error: ${error.message}`);
+                });
             }
         }
     });
