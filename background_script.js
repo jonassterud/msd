@@ -32,6 +32,9 @@ browser.runtime.onMessage.addListener((message) => {
                             filename: "score.pdf",
                             url: stream.toBlobURL("application/pdf"),
                             saveAs: true
+                        })
+                        .catch((error) => {
+                            console.error(`Error: ${error.message}`);
                         });
                     });
                 }

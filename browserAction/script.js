@@ -6,12 +6,12 @@ window.onload = async () => {
     });
 
     button.addEventListener("click", () => {
-        button.classList.add("loading");
-        browser.tabs.sendMessage(tabs[0].id, { // Send to content_script.js
+        button.value = "loading..";
+        browser.tabs.sendMessage(tabs[0].id, { // Send to content_script
             id: "msd-start"
         })
         .catch((error) => {
-            alert(`Error: ${error.message}`);
+            alert(`Something went wrong. Make sure the page has fully loaded. Error: ${error.message}`);
         });
     });
 }

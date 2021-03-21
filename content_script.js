@@ -31,7 +31,7 @@ browser.runtime.onMessage.addListener((message) => {
 
         function finish() {
             scoreContainer.scrollTo(0, 0);
-            browser.runtime.sendMessage({
+            browser.runtime.sendMessage({ // Send to background_script
                 id: "msd-create",
                 urls: urls
             })
