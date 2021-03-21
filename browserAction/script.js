@@ -11,7 +11,7 @@ window.onload = async () => {
             id: "msd-start"
         })
         .catch((error) => {
-            console.error(`Error: ${error.message}`);
+            alert(`Error: ${error.message}`);
         });
     });
 }
