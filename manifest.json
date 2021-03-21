@@ -3,7 +3,7 @@
     "name": "Musescore Downloader",
     "description": "Download PDFs from Musescore.",
     "author": "Jonas Sterud",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "icons": {
         "16": "icons/icon16.png",
         "48": "icons/icon48.png",
