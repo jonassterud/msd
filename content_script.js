@@ -6,7 +6,10 @@ browser.runtime.onMessage.addListener((message) => {
         const urls = [];
 
         if (!firstImage || !scoreContainer) {
-            return alert("Wasn't able to find elements. Make sure the page has fully loaded.");
+            return browser.runtime.sendMessage({ // Send to browserAction
+                id: "msd-log",
+                content: "Something went wrong. Wasn't able to find score.\nMake sure the page has fully loaded and is maximized."
+            });
         }
         else if (isNaN(pageCount) || pageCount === 0) {
             pageCount = parseInt(prompt("Page count not found, please set manually:"), 10);
@@ -14,7 +17,12 @@ browser.runtime.onMessage.addListener((message) => {
 
         (function loop(i=0) {
             const MAX_PAGE_COUNT = 200;
-            if (i >= MAX_PAGE_COUNT) return alert("Max page count reached.");
+            if (i >= MAX_PAGE_COUNT) {
+                return browser.runtime.sendMessage({ // Send to browserAction
+                    id: "msd-log",
+                    content: `Max page count (${MAX_PAGE_COUNT}) reached.`
+                });
+            }
 
             scoreContainer.scrollTo(0, i * (scoreContainer.scrollHeight / pageCount));
             setTimeout(() => {
@@ -34,9 +42,6 @@ browser.runtime.onMessage.addListener((message) => {
             browser.runtime.sendMessage({ // Send to background_script
                 id: "msd-create",
                 urls: urls
-            })
-            .catch((error) => {
-                alert(`Error: ${error.message}`);
             });
         }
     }

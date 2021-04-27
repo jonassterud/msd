@@ -11,7 +11,23 @@ window.onload = async () => {
             id: "msd-start"
         })
         .catch((error) => {
-            alert(`Something went wrong. Make sure the page has fully loaded. Error: ${error.message}`);
+            logMessage({
+                id: "msd-log",
+                content: `Something went wrong. Make sure the page has fully loaded.\nError: ${error.message}`
+            });
         });
     });
+}
+
+browser.runtime.onMessage.addListener(logMessage);
+
+function logMessage(message) {
+    const statusElement = document.querySelector("#status");
+    if (message.id === "msd-log") {
+        if (statusElement) {
+            statusElement.innerText = message.content;
+        } else {
+            alert(message.content);
+        }
+    }
 }

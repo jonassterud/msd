@@ -12,7 +12,7 @@ browser.runtime.onMessage.addListener((message) => {
             const isPNG = /score_\d+.png/.test(message.urls[0]);
             fetch(message.urls[i])
             .then((res) => {
-                if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+                if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
                 return res.blob();
             })
             .then(async (res) => {
@@ -34,13 +34,19 @@ browser.runtime.onMessage.addListener((message) => {
                             saveAs: true
                         })
                         .catch((error) => {
-                            console.error(`Error: ${error.message}`);
+                            return browser.runtime.sendMessage({ // Send to browserAction
+                                id: "msd-log",
+                                content: `Wasn't able to save PDF.\nError: ${error.message}`
+                            });
                         });
                     });
                 }
             })
             .catch((error) => {
-                console.error(`Error: ${error.message}`);
+                return browser.runtime.sendMessage({ // Send to browserAction
+                    id: "msd-log",
+                    content: error.message
+                });
             });
         }
     }
