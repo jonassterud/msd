@@ -20,6 +20,9 @@ On Firefox, you can:
 3. Or, you type `about:addons` into your address bar, press enter.
 4. Then, click on the cogwheel icon and choose the "Install Add-On From File..." option.
 
+## How to use
+[Video guide here](https://youtu.be/zhobldVPI18)
+
 ## Issues
 Musescore often updates their website, and there is a chance that this extension might then temporarily break. I often get many error reports on the actual chrome extension, but posting them here is preferred. When reporting a issue, try to include as much information as possible (operating system, browser, extension version, etc.), and try your best to describe the issue in detail.
 
