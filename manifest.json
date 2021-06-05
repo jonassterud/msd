@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
-    "name": "Musescore Downloader",
-    "description": "Download PDFs from Musescore.",
+    "name": "Score/Notes Downloader",
+    "description": "Download scores as PDFs from musescore.com",
     "author": "Jonas Sterud",
     "version": "2.0.2",
     "icons": {
@@ -42,7 +42,7 @@
             "128": "icons/icon128.png"
         },
         "browser_style": true,
-        "default_title": "Musescore Downloader",
+        "default_title": "MSD",
         "default_popup": "browserAction/index.html"
     }
 }
