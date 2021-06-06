@@ -7,7 +7,7 @@
 
 ## Installing
 ### Chromium/Others
-On most Chromium based browsers, you can install the extension trough the Chrome Web Store [here](https://chrome.google.com/webstore/detail/musescore-downloader/bglnniclnbhchenijehpcihdobcmedol) (*REMOVED FROM WEB STORE DUE TO "TRADEMARK INFRINGEMENT"*), or you can:
+On most Chromium based browsers, you can install the extension trough the Chrome Web Store [here](https://chrome.google.com/webstore/detail/scorenotes-downloader/hbppggcnhhcgglefhajigobnjemahfkl), or you can:
 1. Downloading the extension as a `.zip` file [here](https://github.com/jonassterud/msd/releases/latest).
 2. Unzip it.
 3. Type `about://extensions` into your address bar and press enter.
